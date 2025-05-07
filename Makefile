@@ -11,5 +11,5 @@ setup-uv:
 	pip install uv
 
 .PHONY: migrate
-migrate: install
+migrate:
 	alembic upgrade head

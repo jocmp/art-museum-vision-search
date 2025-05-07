@@ -1,12 +1,12 @@
 {
-	"name": "Museum Vision",
-	"dockerComposeFile": "docker-compose.yml",
+  "name": "Museum Vision",
+  "dockerComposeFile": "docker-compose.yml",
   "service": "app",
   "workspaceFolder": "/workspace",
-	"forwardPorts": [
-		8080
-	],
-	"customizations": {
+  "forwardPorts": [
+    8080
+  ],
+  "customizations": {
     "vscode": {
       "extensions": [
         "ms-azuretools.vscode-docker",
