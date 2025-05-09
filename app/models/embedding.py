@@ -2,6 +2,7 @@ from pgvector.sqlalchemy import Vector
 from sqlalchemy import BigInteger, String, Column
 from sqlalchemy.orm import mapped_column
 
+from app.db import db_session
 from app.models.base import Base
 
 

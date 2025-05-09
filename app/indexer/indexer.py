@@ -34,8 +34,6 @@ def index_images():
                         f"Loaded image: {image.format}, size: {image.size}, mode: {image.mode}")
                     image_vector = extract_image_vector(image)
 
-                    print(f"NDIM {image_vector.ndim}")
-
                     with db_session() as session:
                         embedding = Embedding(
                             object_id=art_object["object_id"],
