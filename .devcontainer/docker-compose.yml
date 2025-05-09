@@ -6,6 +6,7 @@ services:
       - ..:/workspace:cached
     command: sleep infinity
     network_mode: service:db
+    env_file: devcontainer.env
     environment:
       - UV_LINK_MODE=copy
       - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/museum_vision
@@ -24,5 +25,6 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
     ports:
       - 5432:5432
+
 volumes:
   postgres-data: null

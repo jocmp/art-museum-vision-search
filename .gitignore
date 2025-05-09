@@ -178,3 +178,5 @@ cython_debug/
 *.pkl
 
 .DS_Store
+
+.devcontainer/devcontainer.env

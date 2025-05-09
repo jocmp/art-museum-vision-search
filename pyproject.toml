@@ -11,6 +11,12 @@ dependencies = [
     "sqlalchemy>=2.0.40",
     "psycopg2>=2.9.10",
     "pgvector>=0.4.1",
+    "requests>=2.32.3",
+    "torch>=2.7.0",
+    "pillow>=11.2.1",
+    "torchvision>=0.22.0",
+    "clip-anytorch>=2.6.0",
+    "setuptools>=80.3.1",
 ]
 
 [tool.uv]

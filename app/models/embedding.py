@@ -1,7 +1,8 @@
-from sqlalchemy.ext.declarative import declarative_base
-from pgvector import Vector
+from pgvector.sqlalchemy import Vector
 from sqlalchemy import BigInteger, String, Column
-from app.models import Base
+from sqlalchemy.orm import mapped_column
+
+from app.models.base import Base
 
 
 class Embedding(Base):
@@ -9,4 +10,4 @@ class Embedding(Base):
     id = Column(BigInteger, autoincrement=True, primary_key=True)
     object_id = Column(String)
     image_url = Column(String)
-    image_vector = Column(Vector(3))
+    image_vector = mapped_column(Vector(2560))
