@@ -22,7 +22,9 @@ depends_on: Union[str, Sequence[str], None] = None
 def upgrade() -> None:
     op.create_table(
         'embeddings',
-        sa.Column('id', sa.BigInteger(), nullable=False),
+        sa.Column('id', sa.BigInteger(), autoincrement=True, nullable=False),
+        sa.Column('object_id', sa.String(), nullable=False),
+        sa.Column('image_url', sa.String(), nullable=False),
         sa.Column('image_vector', Vector(3), nullable=True),
         sa.PrimaryKeyConstraint('id')
     )
