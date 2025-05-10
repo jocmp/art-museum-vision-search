@@ -1,37 +1,36 @@
 name: art-museum-vision-search
 
 databases:
-- cluster_name: ${DATABASE_SERVICE}
-  db_name: ${DATABASE_NAME}
-  db_user: ${DATABASE_USER}
-  engine: PG
-  name: ${DATABASE_SERVICE}
-  production: true
-  version: "17"
+  - cluster_name: ${DATABASE_SERVICE}
+    db_name: ${DATABASE_NAME}
+    db_user: ${DATABASE_USER}
+    engine: PG
+    name: ${DATABASE_SERVICE}
+    production: true
+    version: "17"
 envs:
-- key: ART_MUSEUM_COLLECTION_URL
-  scope: RUN_TIME
-  value: ${ART_MUSEUM_COLLECTION_URL}
+  - key: ART_MUSEUM_COLLECTION_URL
+    scope: RUN_TIME
+    value: ${ART_MUSEUM_COLLECTION_URL}
 ingress:
   rules:
-  - component:
-      name: jocmp-art-museum-vision-search
-    match:
-      path:
-        prefix: /
+    - component:
+        name: jocmp-art-museum-vision-search
+      match:
+        path:
+          prefix: /
 region: nyc
 services:
-- envs:
-  - key: DATABASE_URL
-    scope: RUN_TIME
-    value: ${db-gvsu-art-museum-search.DATABASE_URL}
-  http_port: 8000
-  image:
-    digest: ${DIGEST}
-    registry: jocmp
-    registry_type: GHCR
-    repository: art-museum-vision-search
-  instance_count: 1
-  instance_size_slug: apps-s-1vcpu-1gb-fixed
-  name: jocmp-art-museum-vision-search
-  run_command: make migrate
+  - envs:
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        value: ${db-gvsu-art-museum-search.DATABASE_URL}
+    http_port: 8000
+    image:
+      digest: ${DIGEST}
+      registry: jocmp
+      registry_type: GHCR
+      repository: art-museum-vision-search
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-1gb-fixed
+    name: jocmp-art-museum-vision-search
