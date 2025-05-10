@@ -8,6 +8,7 @@ from fastapi import FastAPI
 app = FastAPI()
 
 
+
 # @app.post("/search")
 # async def search(image: UploadFile):
 #     try:
