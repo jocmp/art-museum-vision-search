@@ -1,4 +1,8 @@
 from fastapi import FastAPI
+from fastapi.concurrency import asynccontextmanager
+from alembic.config import Config
+from alembic import command
+
 # from fastapi import UploadFile
 # from fastapi.responses import JSONResponse
 
@@ -8,6 +12,9 @@ from fastapi import FastAPI
 app = FastAPI()
 
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    command.upgrade(Config(), 'head')
 
 # @app.post("/search")
 # async def search(image: UploadFile):
@@ -20,6 +27,7 @@ app = FastAPI()
 #             status_code=500,
 #             content={"error": f"Error processing image: {str(e)}"}
 #         )
+
 
 @app.get("/health")
 async def health():
