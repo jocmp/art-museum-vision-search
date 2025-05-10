@@ -1,13 +1,5 @@
 name: art-museum-vision-search
 
-services:
-- name: jocmp-art-museum-vision-search
-  image:
-   registry_type: GHCR
-   registry: jocmp
-   repository: art-museum-vision-search
-   digest: ${DIGEST}
-
 databases:
 - cluster_name: ${DATABASE_SERVICE}
   db_name: ${DATABASE_NAME}
@@ -27,7 +19,6 @@ ingress:
     match:
       path:
         prefix: /
-name: art-museum-vision-search
 region: nyc
 services:
 - envs:
@@ -41,5 +32,5 @@ services:
     registry_type: GHCR
     repository: art-museum-vision-search
   instance_count: 1
-  instance_size_slug: apps-s-1vcpu-0.5gb
+  instance_size_slug: apps-s-1vcpu-1gb-fixed
   name: jocmp-art-museum-vision-search
