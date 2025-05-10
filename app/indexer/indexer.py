@@ -55,7 +55,3 @@ def index_images():
     except json.JSONDecodeError as e:
         print(f"Error decoding JSON from {collection_url}: {str(e)}")
         return []
-
-
-if __name__ == "__main__":
-    index_images()
