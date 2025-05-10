@@ -19,3 +19,7 @@ async def search(image: UploadFile):
             status_code=500,
             content={"error": f"Error processing image: {str(e)}"}
         )
+
+@app.get("/health")
+async def health():
+    return {"status": "OK"}

@@ -1,4 +1,4 @@
-FROM python:3.11.12-alpine
+FROM python:3.11-bullseye
 
 ENV PYTHONUNBUFFERED=1
 
@@ -34,6 +34,8 @@ COPY ./scripts /app/scripts
 COPY ./pyproject.toml ./uv.lock ./alembic.ini /app/
 
 COPY ./app /app/app
+
+RUN mkdir -p /root/.cache/
 
 # Sync the project
 # Ref: https://docs.astral.sh/uv/guides/integration/docker/#intermediate-layers
