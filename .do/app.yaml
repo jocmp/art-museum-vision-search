@@ -25,6 +25,10 @@ services:
       - key: DATABASE_URL
         scope: RUN_TIME
         value: ${db-art-museum-vision-search.DATABASE_URL}
+    health_check:
+      failure_threshold: 30
+      initial_delay_seconds: 60
+      period_seconds: 30
     http_port: 8000
     image:
       digest: ${DIGEST}
