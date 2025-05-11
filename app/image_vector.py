@@ -5,19 +5,23 @@ from PIL import Image
 from torchvision import models, transforms
 from torchvision.models import ResNet101_Weights
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
-clip_model, preprocess_clip = clip.load("ViT-B/16", device=device)
+def init_models():
+    global device
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    global clip_model, preprocess_clip
+    clip_model, preprocess_clip = clip.load("ViT-B/16", device=device)
 
-resnet_model = models.resnet101(weights=ResNet101_Weights.IMAGENET1K_V1)
-resnet_model = torch.nn.Sequential(*(list(resnet_model.children())[:-1]))
-resnet_model.eval()
+    global resnet_model
+    resnet_model = models.resnet101(weights=ResNet101_Weights.IMAGENET1K_V1)
+    resnet_model = torch.nn.Sequential(*(list(resnet_model.children())[:-1]))
+    resnet_model.eval()
 
-resnet_transform = transforms.Compose([
-    transforms.Resize((224, 224)),
-    transforms.ToTensor(),
-    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-])
-
+    global resnet_transform
+    resnet_transform = transforms.Compose([
+        transforms.Resize((224, 224)),
+        transforms.ToTensor(),
+        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    ])
 
 def extract_image_vector(image: Image.Image) -> np.ndarray:
     clip_img = preprocess_clip(image).unsqueeze(0).to(device)
