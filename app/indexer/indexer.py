@@ -1,17 +1,14 @@
 import os
 import requests
 import json
-from PIL import Image
 from io import BytesIO
 
 from app.db import db_session
-from app.image_vector import extract_image_vector, init_models
+from app.image_vector import extract_image_vector
 from app.models.embedding import Embedding
 
 
 def index_images():
-    init_models()
-
     base_collection_url = os.environ.get("ART_MUSEUM_COLLECTION_URL")
     collection_url = f"{base_collection_url}/objectSearch?q=AI_test_set"
 
@@ -28,12 +25,10 @@ def index_images():
         for _, art_object in filtered_data.items():
             if "media_large_url" in art_object:
                 try:
-                    img_response = requests.get(art_object["media_large_url"])
-                    img_response.raise_for_status()
+                    image_url = art_object["media_large_url"]
+                    image_vector = extract_image_vector(value=image_url)
 
-                    image = Image.open(BytesIO(img_response.content))
-                    image_vector = extract_image_vector(image)
-                    print(f"Loaded image")
+                    print(f"Loaded image {image_url}")
 
                     with db_session() as session:
                         embedding = Embedding(
