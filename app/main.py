@@ -2,10 +2,9 @@ import os
 from fastapi import FastAPI
 from fastapi.concurrency import asynccontextmanager
 from alembic.config import Config
-from alembic import context
 from alembic import command
 
-from app.image_vector import init_models
+# from app.image_vector import init_models
 
 # from fastapi import UploadFile
 # from fastapi.responses import JSONResponse
