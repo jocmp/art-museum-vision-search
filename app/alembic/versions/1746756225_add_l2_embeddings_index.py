@@ -18,7 +18,8 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    op.execute("CREATE INDEX ON embeddings USING hnsw ((binary_quantize(image_vector)::bit(2560)) bit_hamming_ops)")
+    op.execute(
+        "CREATE INDEX ON embeddings USING hnsw ((binary_quantize(image_vector)::bit(512)) bit_hamming_ops)")
 
 
 def downgrade() -> None:

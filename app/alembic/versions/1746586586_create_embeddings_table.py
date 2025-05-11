@@ -26,7 +26,7 @@ def upgrade() -> None:
         sa.Column('id', sa.BigInteger(), autoincrement=True, nullable=False),
         sa.Column('object_id', sa.String(), nullable=False),
         sa.Column('image_url', sa.String(), nullable=False),
-        sa.Column('image_vector', Vector(2560), nullable=True),
+        sa.Column('image_vector', Vector(512), nullable=True),
         sa.PrimaryKeyConstraint('id')
     )
 

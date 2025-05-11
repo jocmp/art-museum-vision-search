@@ -5,11 +5,13 @@ from PIL import Image
 from io import BytesIO
 
 from app.db import db_session
-from app.image_vector import extract_image_vector
+from app.image_vector import extract_image_vector, init_models
 from app.models.embedding import Embedding
 
 
 def index_images():
+    init_models()
+
     base_collection_url = os.environ.get("ART_MUSEUM_COLLECTION_URL")
     collection_url = f"{base_collection_url}/objectSearch?q=AI_test_set"
 
@@ -30,9 +32,8 @@ def index_images():
                     img_response.raise_for_status()
 
                     image = Image.open(BytesIO(img_response.content))
-                    print(
-                        f"Loaded image: {image.format}, size: {image.size}, mode: {image.mode}")
                     image_vector = extract_image_vector(image)
+                    print(f"Loaded image")
 
                     with db_session() as session:
                         embedding = Embedding(
@@ -55,3 +56,7 @@ def index_images():
     except json.JSONDecodeError as e:
         print(f"Error decoding JSON from {collection_url}: {str(e)}")
         return []
+
+
+if __name__ == "__main__":
+    index_images()

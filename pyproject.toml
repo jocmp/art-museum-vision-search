@@ -7,7 +7,6 @@ dependencies = [
     "fastapi[standard]>=0.114.2,<1.0.0",
     "alembic<2.0.0,>=1.12.1",
     "psycopg[binary]<4.0.0,>=3.1.13",
-    "sqlmodel<1.0.0,>=0.0.21",
     "sqlalchemy>=2.0.40",
     "psycopg2>=2.9.10",
     "pgvector>=0.4.1",

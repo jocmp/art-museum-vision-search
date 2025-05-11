@@ -6,10 +6,10 @@ from alembic import command
 
 from app.image_vector import init_models
 
-# from fastapi import UploadFile
-# from fastapi.responses import JSONResponse
+from fastapi import UploadFile
+from fastapi.responses import JSONResponse
 
-# from app.search.related_images import search_related_images
+from app.search.related_images import search_related_images
 
 app = FastAPI()
 
@@ -26,17 +26,17 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 
-# @app.post("/search")
-# async def search(image: UploadFile):
-#     try:
-#         result = await search_related_images(image)
+@app.post("/search")
+async def search(image: UploadFile):
+    try:
+        result = await search_related_images(image)
 
-#         return JSONResponse(content={"results": result})
-#     except Exception as e:
-#         return JSONResponse(
-#             status_code=500,
-#             content={"error": f"Error processing image: {str(e)}"}
-#         )
+        return JSONResponse(content={"results": result})
+    except Exception as e:
+        return JSONResponse(
+            status_code=500,
+            content={"error": f"Error processing image: {str(e)}"}
+        )
 
 
 @app.get("/")
