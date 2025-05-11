@@ -32,5 +32,5 @@ services:
       registry_type: GHCR
       repository: art-museum-vision-search
     instance_count: 1
-    instance_size_slug: apps-s-1vcpu-1gb-fixed
+    instance_size_slug: apps-s-1vcpu-2gb
     name: jocmp-art-museum-vision-search
