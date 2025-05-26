@@ -37,4 +37,4 @@ services:
       repository: art-museum-vision-search
     instance_count: 1
     instance_size_slug: apps-s-1vcpu-2gb
-    name: gvsu-art-museum-vision-search
+    name: art-museum-vision-search
