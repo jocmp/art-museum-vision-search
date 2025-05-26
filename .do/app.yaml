@@ -1,11 +1,11 @@
 name: art-museum-vision-search
 
 databases:
-  - cluster_name: db-art-museum-vision-search
+  - cluster_name: museum-vision
     db_name: ${DATABASE_NAME}
     db_user: ${DATABASE_USER}
     engine: PG
-    name: db-art-museum-vision-search
+    name: museum-vision
     production: true
     version: "17"
 envs:
@@ -15,7 +15,7 @@ envs:
 ingress:
   rules:
     - component:
-        name: gvsu-art-museum-vision-search
+        name: art-museum-vision-search
       match:
         path:
           prefix: /
