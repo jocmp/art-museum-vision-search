@@ -15,7 +15,7 @@ envs:
 ingress:
   rules:
     - component:
-        name: jocmp-art-museum-vision-search
+        name: gvsu-art-museum-vision-search
       match:
         path:
           prefix: /
@@ -24,7 +24,7 @@ services:
   - envs:
       - key: DATABASE_URL
         scope: RUN_TIME
-        value: ${db-art-museum-vision-search.DATABASE_URL}
+        value: ${museum-vision.DATABASE_URL}
     health_check:
       failure_threshold: 30
       initial_delay_seconds: 60
@@ -37,4 +37,4 @@ services:
       repository: art-museum-vision-search
     instance_count: 1
     instance_size_slug: apps-s-1vcpu-2gb
-    name: jocmp-art-museum-vision-search
+    name: gvsu-art-museum-vision-search
