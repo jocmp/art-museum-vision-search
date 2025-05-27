@@ -8,10 +8,6 @@ databases:
     name: museum-vision
     production: true
     version: "17"
-envs:
-  - key: ART_MUSEUM_COLLECTION_URL
-    scope: RUN_TIME
-    value: ${ART_MUSEUM_COLLECTION_URL}
 ingress:
   rules:
     - component:
@@ -25,6 +21,9 @@ services:
       - key: DATABASE_URL
         scope: RUN_TIME
         value: ${museum-vision.DATABASE_URL}
+      - key: ART_MUSEUM_COLLECTION_URL
+        scope: RUN_TIME
+        value: ${ART_MUSEUM_COLLECTION_URL}
     health_check:
       failure_threshold: 30
       initial_delay_seconds: 60

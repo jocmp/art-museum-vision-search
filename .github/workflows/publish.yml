@@ -31,5 +31,8 @@ jobs:
         uses: digitalocean/app_action/deploy@v2
         env:
           DIGEST: ${{ steps.push.outputs.digest }}
+          ART_MUSEUM_COLLECTION_URL: ${{ secrets.ART_MUSEUM_COLLECTION_URL }}
+          DATABASE_USER: ${{ secrets.DATABASE_USER }}
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
