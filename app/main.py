@@ -10,6 +10,7 @@ from fastapi import UploadFile
 from fastapi.responses import JSONResponse
 
 from app.search.related_images import search_related_images
+import traceback
 
 app = FastAPI()
 
@@ -33,6 +34,7 @@ async def search(image: UploadFile):
 
         return JSONResponse(content={"results": result})
     except Exception as e:
+        print(traceback.format_exc())
         return JSONResponse(
             status_code=500,
             content={"error": f"Error processing image: {str(e)}"}
