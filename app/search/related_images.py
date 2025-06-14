@@ -16,7 +16,7 @@ async def search_related_images(image: UploadFile):
 
     with db_session() as session:
         results = session.scalars(select(Embedding).order_by(
-            Embedding.image_vector.l2_distance(image_vector)).limit(10))
+            Embedding.image_vector.l2_distance(image_vector)).limit(20))
 
         return [{
             "object_id": row.object_id,
