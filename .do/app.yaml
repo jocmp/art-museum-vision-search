@@ -46,11 +46,6 @@ workers:
       - key: ART_MUSEUM_COLLECTION_URL
         scope: RUN_TIME
         value: ${ART_MUSEUM_COLLECTION_URL}
-    image:
-      digest: ${DIGEST}
-      registry: jocmp
-      registry_type: GHCR
-      repository: art-museum-vision-search
     instance_count: 1
     instance_size_slug: apps-s-1vcpu-2gb
     name: art-museum-vision-search-indexer
