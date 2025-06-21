@@ -38,7 +38,6 @@ services:
     instance_size_slug: apps-s-1vcpu-2gb
     name: art-museum-vision-search
 workers:
-  - dockerfile_path: Dockerfile.indexer
   - envs:
       - key: DATABASE_URL
         scope: RUN_TIME
@@ -48,5 +47,6 @@ workers:
         value: ${ART_MUSEUM_COLLECTION_URL}
     instance_count: 1
     instance_size_slug: apps-s-1vcpu-2gb
-    name: art-museum-vision-search-indexer
     source_dir: /
+    dockerfile_path: Dockerfile.indexer
+    name: art-museum-vision-search-indexer
