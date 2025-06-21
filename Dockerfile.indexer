@@ -1,5 +1,10 @@
 FROM python:3.11-slim
 
+RUN apt-get update
+
+RUN apt-get install -y \
+  cron
+
 ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app/
@@ -31,18 +36,10 @@ COPY ./app /app/app
 
 RUN mkdir -p /root/.cache/
 
-# Install dependencies
-# Ref: https://docs.astral.sh/uv/guides/integration/docker/#intermediate-layers
-RUN --mount=type=cache,target=/root/.cache/uv \
-  --mount=type=bind,source=uv.lock,target=uv.lock \
-  --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-  uv sync --frozen --no-install-project
+COPY crontab /etc/cron.d/indexer-cron
 
-# Sync the project
-# Ref: https://docs.astral.sh/uv/guides/integration/docker/#intermediate-layers
-RUN --mount=type=cache,target=/root/.cache/uv \
-  uv sync
+RUN chmod 0644 /etc/cron.d/indexer-cron \
+    && chmod +x /app/scripts/indexer \
+    && crontab /etc/cron.d/indexer-cron
 
-EXPOSE 8000
-
-CMD ["fastapi", "run", "--workers", "1", "app/main.py"]
+CMD ["crond", "-f", "-l", "2"]
