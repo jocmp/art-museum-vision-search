@@ -48,10 +48,9 @@ workers:
     instance_count: 1
     instance_size_slug: apps-s-1vcpu-2gb
     source_dir: /
-    dockerfile_path: Dockerfile.indexer
     image:
       digest: ${INDEXER_DIGEST}
       registry: jocmp
       registry_type: GHCR
-      repository: art-museum-vision-search
+      repository: art-museum-vision-search-indexer
     name: art-museum-vision-search-indexer
