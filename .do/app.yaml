@@ -49,4 +49,8 @@ workers:
     instance_size_slug: apps-s-1vcpu-2gb
     source_dir: /
     dockerfile_path: Dockerfile.indexer
+    github:
+      branch: main
+      deploy_on_push: true
+      repo: jocmp/art-museum-vision-search
     name: art-museum-vision-search-indexer
