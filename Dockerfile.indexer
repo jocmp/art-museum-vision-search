@@ -42,4 +42,4 @@ RUN chmod 0644 /etc/cron.d/indexer-cron \
     && chmod +x /app/scripts/indexer \
     && crontab /etc/cron.d/indexer-cron
 
-CMD ["crond", "-f", "-l", "2"]
+CMD ["cron", "-f", "-l", "2"]
