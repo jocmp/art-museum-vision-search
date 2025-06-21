@@ -1,0 +1,2 @@
+# 0 7 * * * /app/scripts/indexer
+* * * * * /app/scripts/indexer
