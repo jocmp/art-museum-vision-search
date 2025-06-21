@@ -36,6 +36,15 @@ COPY ./app /app/app
 
 RUN mkdir -p /root/.cache/
 
+RUN mkdir -p /root/.cache/
+
+# Install dependencies
+# Ref: https://docs.astral.sh/uv/guides/integration/docker/#intermediate-layers
+RUN --mount=type=cache,target=/root/.cache/uv \
+  --mount=type=bind,source=uv.lock,target=uv.lock \
+  --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+  uv sync --frozen --no-install-project
+
 COPY crontab /etc/cron.d/indexer-cron
 
 RUN chmod 0644 /etc/cron.d/indexer-cron \

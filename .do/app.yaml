@@ -30,7 +30,7 @@ services:
       period_seconds: 30
     http_port: 8000
     image:
-      digest: ${DIGEST}
+      digest: ${APP_DIGEST}
       registry: jocmp
       registry_type: GHCR
       repository: art-museum-vision-search
@@ -49,8 +49,9 @@ workers:
     instance_size_slug: apps-s-1vcpu-2gb
     source_dir: /
     dockerfile_path: Dockerfile.indexer
-    github:
-      branch: main
-      deploy_on_push: true
-      repo: jocmp/art-museum-vision-search
+    image:
+      digest: ${INDEXER_DIGEST}
+      registry: jocmp
+      registry_type: GHCR
+      repository: art-museum-vision-search
     name: art-museum-vision-search-indexer
