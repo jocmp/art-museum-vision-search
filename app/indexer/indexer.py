@@ -23,6 +23,7 @@ def index_images():
         collection_url = f"{base_collection_url}/objectSearch?q=modified:\"{modification_range}\"&limit={limit}&start={start}"
 
         if not index_batch(collection_url=collection_url):
+            print(f"Stopping: limit={limit}, start={start}")
             break
 
         start += limit
