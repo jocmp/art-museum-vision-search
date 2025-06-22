@@ -46,7 +46,8 @@ jobs:
         id: push
         uses: docker/build-push-action@v6.5.0
         with:
-          context: Dockerfile.indexer
+          context: .
+          file: Dockerfile.indexer
           push: true
           tags: ghcr.io/${{ github.repository }}-indexer:latest
   deploy:
