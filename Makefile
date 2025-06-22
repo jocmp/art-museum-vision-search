@@ -11,7 +11,7 @@ setup-uv:
 	pip install uv
 
 .PHONY: backfill
-backfill: install
+backfill:
 	python app/indexer/indexer.py
 
 .PHONY: migrate
