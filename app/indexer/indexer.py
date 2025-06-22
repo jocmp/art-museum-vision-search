@@ -8,7 +8,7 @@ from sqlalchemy import select
 from app.db import db_session
 from app.image_vector import extract_image_vector, init_models
 from app.models.embedding import Embedding
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 
 def index_images():
@@ -47,7 +47,8 @@ def index_batch(collection_url: str) -> bool:
                     with db_session() as session:
                         existing_embedding = session.scalar(
                             select(Embedding).where(
-                                Embedding.object_id == str(art_object["object_id"])
+                                Embedding.object_id == str(
+                                    art_object["object_id"])
                             )
                         )
 
@@ -64,14 +65,16 @@ def index_batch(collection_url: str) -> bool:
                         image_vector = extract_image_vector(image)
 
                         if existing_embedding:
-                            existing_embedding.image_url = art_object["media_large_url"]
+                            existing_embedding.image_url =""# art_object["media_large_url"]
                             existing_embedding.image_vector = image_vector
+                            existing_embedding.updated_at = datetime.now(timezone.utc)
                             print(f"Updated {art_object['object_id']}")
                         else:
                             embedding = Embedding(
                                 object_id=art_object["object_id"],
                                 image_url=art_object["media_large_url"],
-                                image_vector=image_vector
+                                image_vector=image_vector,
+                                updated_at=datetime.now(timezone.utc),
                             )
                             session.add(embedding)
                             print(f"Added {art_object['object_id']}")
