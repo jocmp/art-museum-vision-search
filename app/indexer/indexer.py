@@ -65,7 +65,7 @@ def index_batch(collection_url: str) -> bool:
                         image_vector = extract_image_vector(image)
 
                         if existing_embedding:
-                            existing_embedding.image_url =""# art_object["media_large_url"]
+                            existing_embedding.image_url = art_object["media_large_url"]
                             existing_embedding.image_vector = image_vector
                             existing_embedding.updated_at = datetime.now(timezone.utc)
                             print(f"Updated {art_object['object_id']}")
