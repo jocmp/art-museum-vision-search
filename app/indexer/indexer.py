@@ -82,7 +82,6 @@ def index_batch(collection_url: str) -> bool:
                 except Exception as e:
                     print(
                         f"Error with {art_object.get('object_id')}: {str(e)}")
-                    return False
 
         return True
     except requests.RequestException as e:

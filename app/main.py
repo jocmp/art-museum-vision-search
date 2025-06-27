@@ -1,4 +1,6 @@
 import os
+from typing import Annotated
+import app.indexer.indexer as indexer
 from fastapi import FastAPI
 from fastapi.concurrency import asynccontextmanager
 from alembic.config import Config
@@ -6,7 +8,7 @@ from alembic import command
 
 from app.image_vector import init_models
 
-from fastapi import UploadFile
+from fastapi import UploadFile, BackgroundTasks, Header
 from fastapi.responses import JSONResponse
 
 from app.search.related_images import search_related_images
@@ -44,3 +46,24 @@ async def search(image: UploadFile):
 @app.get("/")
 async def health():
     return {"status": "OK"}
+
+
+@app.post("/index-images")
+async def index_images(
+    background_tasks: BackgroundTasks,
+    x_indexer_secret: Annotated[str | None, Header()] = None,
+):
+    secret = os.environ.get("INDEXER_SECRET")
+
+    if not x_indexer_secret or x_indexer_secret != secret:
+        return JSONResponse(
+            status_code=401,
+            content={"error": "Unauthorized"}
+        )
+
+    background_tasks.add_task(indexer.index_images)
+
+    return JSONResponse(
+        status_code=200,
+        content={"status": "OK"}
+    )
