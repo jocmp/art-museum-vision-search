@@ -1,0 +1,9 @@
+packages:
+    - name: indexer-cron
+      environment: {}
+      parameters: {}
+      functions:
+        - name: push
+          binary: false
+          runtime: python:default
+          web: false

@@ -29,30 +29,9 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/${{ github.repository }}:latest
-  build-push-indexer:
-    runs-on: ubuntu-latest
-    outputs:
-      digest: ${{ steps.push.outputs.digest }}
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Log in to the Container registry
-        uses: docker/login-action@v3.3.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and push Docker image
-        id: push
-        uses: docker/build-push-action@v6.5.0
-        with:
-          context: .
-          file: Dockerfile.indexer
-          push: true
-          tags: ghcr.io/${{ github.repository }}-indexer:latest
   deploy:
     runs-on: ubuntu-latest
-    needs: [build-push-app, build-push-indexer]
+    needs: [build-push-app]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -60,7 +39,6 @@ jobs:
         uses: digitalocean/app_action/deploy@v2
         env:
           APP_DIGEST: ${{ needs.build-push-app.outputs.digest }}
-          INDEXER_DIGEST: ${{ needs.build-push-indexer.outputs.digest }}
           ART_MUSEUM_COLLECTION_URL: ${{ secrets.ART_MUSEUM_COLLECTION_URL }}
           DATABASE_USER: ${{ secrets.DATABASE_USER }}
           DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
