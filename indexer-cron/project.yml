@@ -7,3 +7,8 @@ packages:
           binary: false
           runtime: python:default
           web: false
+          triggers:
+          - name: trigger-daily
+            sourceType: scheduler
+            sourceDetails:
+              cron: "* * * * *"

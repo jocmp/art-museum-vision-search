@@ -37,3 +37,14 @@ services:
     instance_count: 1
     instance_size_slug: apps-s-1vcpu-2gb
     name: art-museum-vision-search
+
+functions:
+  - name: indexer-cron
+    source_dir: indexer-cron
+    envs:
+      - key: VISION_SEARCH_URL
+        scope: RUN_TIME
+        value: ${VISION_SEARCH_URL}
+      - key: INDEXER_SECRET
+        scope: RUN_TIME
+        value: ${INDEXER_SECRET}
