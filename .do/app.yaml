@@ -41,6 +41,10 @@ services:
 functions:
   - name: indexer-cron
     source_dir: indexer-cron
+    github:
+      repo: jocmp/art-museum-vision-search
+      deploy_on_push: true
+      branch: main
     envs:
       - key: VISION_SEARCH_URL
         scope: RUN_TIME
