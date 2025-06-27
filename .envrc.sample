@@ -1,0 +1,2 @@
+export VISION_SEARCH_URL=https://example.com
+export INDEXER_SECRET=its-a-secret-to-everyone

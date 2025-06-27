@@ -40,7 +40,6 @@ jobs:
         env:
           APP_DIGEST: ${{ needs.build-push-app.outputs.digest }}
           ART_MUSEUM_COLLECTION_URL: ${{ secrets.ART_MUSEUM_COLLECTION_URL }}
-          VISION_SEARCH_URL: ${{ secrets.VISION_SEARCH_URL }}
           INDEXER_SECRET: ${{ secrets.INDEXER_SECRET }}
           DATABASE_USER: ${{ secrets.DATABASE_USER }}
           DATABASE_NAME: ${{ secrets.DATABASE_NAME }}

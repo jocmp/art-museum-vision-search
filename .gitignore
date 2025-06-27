@@ -180,3 +180,8 @@ cython_debug/
 .DS_Store
 
 .devcontainer/devcontainer.env
+.envrc
+
+# DO Functions
+.deployed
+__deployer__.zip

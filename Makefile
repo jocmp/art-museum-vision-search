@@ -9,7 +9,11 @@ install: setup-uv
 .PHONY: setup-uv
 setup-uv:
 	pip install uv
-	
+
 .PHONY: migrate
 migrate:
 	alembic upgrade head
+
+.PHONY: deploy-fn
+deploy-fn: ## Deploy indexer trigger
+	doctl serverless deploy .

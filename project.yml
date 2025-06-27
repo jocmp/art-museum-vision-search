@@ -1,14 +1,15 @@
 packages:
     - name: indexer-cron
-      environment: {}
-      parameters: {}
       functions:
         - name: push
           binary: false
           runtime: python:default
           web: false
+          environment:
+            VISION_SEARCH_URL: ${VISION_SEARCH_URL}
+            INDEXER_SECRET: ${INDEXER_SECRET}
           triggers:
           - name: trigger-daily
             sourceType: scheduler
             sourceDetails:
-              cron: "* * * * *"
+              cron: "0 7 * * *"
