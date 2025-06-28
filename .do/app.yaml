@@ -24,6 +24,9 @@ services:
       - key: ART_MUSEUM_COLLECTION_URL
         scope: RUN_TIME
         value: ${ART_MUSEUM_COLLECTION_URL}
+      - key: INDEXER_SECRET
+        scope: RUN_TIME
+        value: ${INDEXER_SECRET}
     health_check:
       failure_threshold: 30
       initial_delay_seconds: 60
