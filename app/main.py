@@ -49,7 +49,7 @@ async def health():
 
 
 @app.post("/index-images")
-async def index_images(
+def index_images(
     background_tasks: BackgroundTasks,
     x_indexer_secret: Annotated[str | None, Header()] = None,
 ):
@@ -64,6 +64,6 @@ async def index_images(
     background_tasks.add_task(indexer.index_images)
 
     return JSONResponse(
-        status_code=200,
-        content={"status": "OK"}
+        status_code=202,
+        content={"status": "Accepted"}
     )
