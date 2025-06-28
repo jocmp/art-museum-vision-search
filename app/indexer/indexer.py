@@ -6,14 +6,12 @@ from io import BytesIO
 from sqlalchemy import select
 
 from app.db import db_session
-from app.image_vector import extract_image_vector, init_models
+from app.image_vector import extract_image_vector
 from app.models.embedding import Embedding
 from datetime import datetime, timedelta, timezone
 
 
 def index_images():
-    init_models()
-
     modification_range = generate_modification_range()
     base_collection_url = os.environ.get("ART_MUSEUM_COLLECTION_URL")
     limit = 50
